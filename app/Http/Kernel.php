@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Routing\Router;
+use Illuminate\Contracts\Foundation\Application;
 
 class Kernel extends HttpKernel
 {
@@ -13,6 +15,13 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+
+    public function __construct(Application $app, Router $router)
+
+    {
+       $app->useEnvironmentPath('/var/www/env/xchange-api/');// here you can customize the path.
+        parent::__construct($app, $router);
+    }
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
